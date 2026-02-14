@@ -1,0 +1,14 @@
+<view class="todo-input-container">
+  <input 
+    class="todo-input"
+    placeholder="{{placeholder}}"
+    placeholder-class="input-placeholder"
+    value="{{value}}"
+    bindinput="onInput"
+    bindconfirm="onConfirm"
+    confirm-type="done"
+  />
+  <view class="add-btn {{value ? 'active' : ''}}" bindtap="onConfirm">
+    <image class="plus-icon" src="../../assets/plus.svg" />
+  </view>
+</view>

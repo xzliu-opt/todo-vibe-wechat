@@ -1,0 +1,111 @@
+# ==============================
+# OS & System Files
+# ==============================
+.DS_Store
+Thumbs.db
+.fseventsd
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# ==============================
+# Node.js & Package Managers
+# ==============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/
+package-lock.json
+yarn.lock
+
+# Note: Keep lockfiles (package-lock.json, yarn.lock) if you want consistent installs. 
+# Uncomment the lines above if you prefer not to track them, but standard practice is to track them.
+# For this project, we'll keep them tracked by default, so I'm removing them from ignore below 
+# unless specifically requested. (Re-adding them as comments for awareness).
+# !package-lock.json
+# !yarn.lock
+
+# ==============================
+# Editor & IDE
+# ==============================
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+
+# Cursor
+.cursor/
+
+# Vim/Emacs
+*.swp
+*.swo
+*~
+\#*#
+
+# ==============================
+# Security & Secrets (CRITICAL)
+# ==============================
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+
+# Keys and Certificates
+*.key
+*.pem
+*.p12
+*.cer
+*.crt
+*.pfx
+*.asc
+id_rsa
+id_rsa.pub
+
+# Credentials
+credentials.json
+secrets.json
+google-services.json
+
+# ==============================
+# WeChat Mini Program Specific
+# ==============================
+# Private project configuration (User specific)
+project.private.config.json
+project.config.json
+
+# CI/CD Upload Key
+upload.private.key.json
+
+# Generated Node Modules for Mini Program
+miniprogram_npm/
+
+# Build/Dist directories (if strictly source-only)
+# dist/
+# unpackage/
+
+# Wechat DevTools
+.wechat_devtools_*/
+
+# ==============================
+# Web App (Next.js / React) - If applicable for monorepo
+# ==============================
+.next/
+out/
+build/
+coverage/
+.nyc_output/

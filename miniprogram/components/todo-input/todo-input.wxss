@@ -1,0 +1,50 @@
+.todo-input-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-input);
+  border-radius: 32rpx;
+  padding: 8rpx 8rpx 8rpx 32rpx;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.todo-input {
+  flex: 1;
+  height: 88rpx;
+  font-size: 34rpx;
+  color: var(--color-text);
+}
+
+.input-placeholder {
+  color: var(--color-input-placeholder);
+}
+
+.add-btn {
+  width: 88rpx;
+  height: 88rpx;
+  background-color: var(--color-btn-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  transition: all 0.2s ease;
+}
+
+.add-btn.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+}
+
+.plus-icon {
+  width: 40rpx;
+  height: 40rpx;
+  filter: invert(1); /* Ensure white icon on dark button */
+}

@@ -1,0 +1,9 @@
+{
+    "desc": "About 2 minutes",
+    "rules": [
+        {
+            "action": "allow",
+            "page": "*"
+        }
+    ]
+}

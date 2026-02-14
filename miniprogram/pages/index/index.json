@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "todo-input": "../../components/todo-input/todo-input",
+        "todo-item": "../../components/todo-item/todo-item"
+    },
+    "navigationBarTitleText": "Flow"
+}

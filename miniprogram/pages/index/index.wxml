@@ -1,0 +1,73 @@
+<view class="container {{theme === 'dark' ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">flow.</text>
+    <text class="subtitle">{{translations.credits}}</text>
+  </view>
+
+  <view class="top-controls">
+      <view class="lang-toggle" bindtap="toggleLanguage">
+        <text>{{currentLang === 'en' ? 'EN' : '中'}}</text>
+      </view>
+       <view class="theme-toggle" bindtap="toggleTheme">
+        <text>{{theme === 'light' ? 'Wait' : 'Moon'}}</text> <!-- Placeholder icon/text -->
+      </view>
+  </view>
+
+  <view class="surface">
+    <view class="input-section">
+      <todo-input placeholder="{{translations.placeholder}}" bind:add="onAddTodo" />
+    </view>
+
+    <view class="filter-tabs">
+      <text class="counter invisible">{{activeCount}} {{translations.itemsLeft}}</text>
+      
+      <view class="filters">
+        <block wx:for="{{filters}}" wx:key="key">
+          <view 
+            class="filter-chip {{filter === item.key ? 'active' : ''}}" 
+            bindtap="setFilter" 
+            data-filter="{{item.key}}"
+          >
+            <text>{{item.label}}</text>
+          </view>
+        </block>
+      </view>
+
+      <text class="counter">{{activeCount}} {{translations.itemsLeft}}</text>
+    </view>
+
+    <scroll-view scroll-y class="todo-list" show-scrollbar="{{false}}">
+      <block wx:if="{{filteredTodos.length === 0}}">
+        <view class="empty-state">
+            <view class="empty-icon"></view> 
+            <text class="empty-title">{{translations.emptyStateTitle}}</text>
+            <text class="empty-subtitle">{{translations.emptyStateSubtitle}}</text>
+        </view>
+      </block>
+      <block wx:else>
+         <block wx:for="{{filteredTodos}}" wx:key="id">
+           <view class="todo-item-wrapper {{index > 0 ? 'border-top' : ''}}">
+             <todo-item 
+                todo="{{item}}" 
+                bind:toggle="onToggleTodo" 
+                bind:delete="onDeleteTodo" 
+             />
+           </view>
+         </block>
+      </block>
+       <view class="list-padding"></view>
+    </scroll-view>
+
+    <block wx:if="{{completedCount > 0}}">
+      <view class="clear-section">
+        <view class="clear-btn" bindtap="clearCompleted">
+          <text>{{translations.clearCompleted}} ({{completedCount}})</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <view class="footer">
+      <text>&copy; 2026 liuxiaozhi.org</text>
+  </view>
+</view>

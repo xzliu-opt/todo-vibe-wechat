@@ -1,0 +1,24 @@
+<movable-area class="todo-item-area">
+  <movable-view 
+    class="todo-item-view" 
+    direction="horizontal" 
+    out-of-bounds="{{true}}" 
+    damping="40" 
+    x="{{x}}" 
+    bindchange="onChange"
+    bindtouchend="onTouchEnd"
+  >
+    <view class="todo-content">
+      <view class="checkbox {{todo.completed ? 'checked' : ''}}" catchtap="onToggle">
+        <block wx:if="{{todo.completed}}">
+            <icon type="success_no_circle" size="14" color="var(--color-text)" />
+        </block>
+      </view>
+      <text class="todo-text {{todo.completed ? 'completed' : ''}}">{{todo.text}}</text>
+    </view>
+  </movable-view>
+  
+  <view class="delete-btn" catchtap="onDelete">
+    <text>Delete</text>
+  </view>
+</movable-area>
