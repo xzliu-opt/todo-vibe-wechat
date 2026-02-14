@@ -1,3 +1,4 @@
+/// <reference path="../typings/env.d.ts" />
 // app.ts
 App<IAppOption>({
   globalData: {
@@ -8,7 +9,7 @@ App<IAppOption>({
     // Check system theme
     const systemInfo = wx.getSystemInfoSync();
     if (systemInfo.theme) {
-        this.globalData.theme = systemInfo.theme;
+      this.globalData.theme = systemInfo.theme;
     }
   },
 })

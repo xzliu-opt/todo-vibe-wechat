@@ -15,7 +15,8 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "typeRoots": [
-            "./typings"
+            "./typings",
+            "./node_modules/miniprogram-api-typings"
         ]
     },
     "include": [

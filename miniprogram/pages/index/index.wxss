@@ -37,13 +37,47 @@
     top: 40rpx;
     right: 40rpx;
     display: flex;
-    gap: 30rpx;
+    align-items: center;
+    gap: 32rpx;
     z-index: 100;
 }
 
-.lang-toggle, .theme-toggle {
+.icon-btn {
+    width: 44rpx;
+    height: 44rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.icon-btn:active {
+    opacity: 1;
+}
+
+.icon {
+    width: 44rpx;
+    height: 44rpx;
+    filter: var(--icon-filter);
+}
+
+.lang-toggle {
+    display: flex;
+    align-items: center;
     font-size: 24rpx;
-    color: var(--color-text-secondary);
+    font-weight: 300;
+    color: var(--color-text-tertiary);
+}
+
+.lang-toggle .active {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.lang-toggle .divider {
+    margin: 0 8rpx;
+    color: var(--color-divider);
 }
 
 .surface {

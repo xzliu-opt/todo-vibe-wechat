@@ -1,4 +1,5 @@
 "use strict";
+/// <reference path="../typings/env.d.ts" />
 // app.ts
 App({
     globalData: {

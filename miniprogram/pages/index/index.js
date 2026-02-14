@@ -104,5 +104,16 @@ Page({
         const newTheme = this.data.theme === 'light' ? 'dark' : 'light';
         app.globalData.theme = newTheme;
         this.setData({ theme: newTheme });
+    },
+    onCopyLink() {
+        wx.setClipboardData({
+            data: 'https://github.com/xzliu-opt/todo-vibe-wechat',
+            success: () => {
+                wx.showToast({
+                    title: this.data.currentLang === 'en' ? 'Link Copied' : '链接已复制',
+                    icon: 'success'
+                });
+            }
+        });
     }
 });

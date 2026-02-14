@@ -117,5 +117,28 @@ Page({
         const newTheme = this.data.theme === 'light' ? 'dark' : 'light';
         app.globalData.theme = newTheme;
         this.setData({ theme: newTheme });
+    },
+
+    onSwipeOpen(e: CustomEvent) {
+        const openedId = e.detail.id;
+        // Close previous if different
+        const todoItems = this.selectAllComponents('todo-item');
+        todoItems.forEach((item: any) => {
+            if (item.data.todo.id !== openedId) {
+                item.close();
+            }
+        });
+    },
+
+    onCopyLink() {
+        wx.setClipboardData({
+            data: 'https://github.com/xzliu-opt/todo-vibe-wechat',
+            success: () => {
+                wx.showToast({
+                    title: this.data.currentLang === 'en' ? 'Link Copied' : '链接已复制',
+                    icon: 'success'
+                });
+            }
+        });
     }
 })

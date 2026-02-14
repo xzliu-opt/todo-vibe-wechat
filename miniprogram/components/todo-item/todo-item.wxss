@@ -1,33 +1,60 @@
-.todo-item-area {
+:host {
+  display: block;
   width: 100%;
-  height: 120rpx;
-  position: relative;
-  background: transparent;
 }
 
-.todo-item-view {
+.todo-item {
   width: 100%;
-  height: 100%;
-  background-color: var(--color-surface); /* Wait, individual items shouldn't have bg if list has it, but here we likely want list item bg or transparent */
-  z-index: 10;
+  min-height: 120rpx;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  transition: all 0.3s ease-out;
+  opacity: 1;
 }
 
-/* Adjust for list transparency if needed, but for swipe, view needs background to cover delete btn */
-.todo-item-view {
-  background-color: transparent; 
+.todo-item.deleting {
+  height: 0;
+  min-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .todo-content {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 32rpx;
-  background-color: transparent; 
+  flex: 1;
+  margin-right: 16rpx; /* Space between text and icon */
+  overflow: hidden;
 }
 
+.delete-btn {
+  width: 44px; /* Apple HIG min touch target */
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align icon right inside the touch target */
+  opacity: 1;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.delete-hover {
+    opacity: 0.5;
+}
+
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  /* Icon color is handled in SVG or via filter if needed, but simple SVG replacement is better */
+}
+
+/* Cleanup old classes */
 .checkbox {
   width: 44rpx;
   height: 44rpx;
@@ -38,6 +65,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .checkbox.checked {
@@ -58,20 +86,4 @@
 .todo-text.completed {
   color: var(--color-text-tertiary);
   text-decoration: line-through;
-}
-
-.delete-btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 160rpx;
-  background-color: var(--color-danger);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  z-index: 1;
-  font-size: 30rpx;
 }

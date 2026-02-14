@@ -5,7 +5,7 @@ export const translations = {
         filterCompleted: "Done",
         itemsLeft: "items left",
         placeholder: "What needs to be done?",
-        credits: "Designed by liuxiaozhi.org",
+        credits: "Crafted by Mia & Serge",
         reminderDue: "Reminder due",
         imgAlt: "Todo Image",
         emptyStateTitle: "All caught up!",
@@ -14,7 +14,8 @@ export const translations = {
         clearCompleted: "Clear completed",
         created: "Created",
         done: "Done",
-        took: "Took"
+        took: "Took",
+        copyright: "© 2026 Crafted by Mia & Serge. All Rights Reserved."
     },
     zh: {
         filterAll: "全部",
@@ -22,7 +23,7 @@ export const translations = {
         filterCompleted: "已完成",
         itemsLeft: "项待办",
         placeholder: "需要做什么？",
-        credits: "Designed by liuxiaozhi.org",
+        credits: "来自 小敏 & 小志 的设计",
         reminderDue: "提醒到期",
         imgAlt: "待办图片",
         emptyStateTitle: "完成了所有任务！",
@@ -31,7 +32,8 @@ export const translations = {
         clearCompleted: "清除已完成",
         created: "创建于",
         done: "完成于",
-        took: "耗时"
+        took: "耗时",
+        copyright: "© 2026 Crafted by Mia & Serge. All Rights Reserved."
     }
 };
 

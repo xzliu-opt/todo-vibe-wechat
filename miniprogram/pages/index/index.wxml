@@ -5,11 +5,18 @@
   </view>
 
   <view class="top-controls">
-      <view class="lang-toggle" bindtap="toggleLanguage">
-        <text>{{currentLang === 'en' ? 'EN' : '中'}}</text>
+      <view class="icon-btn" bindtap="onCopyLink">
+         <image class="icon" src="../../assets/github.svg" mode="aspectFit"></image>
       </view>
-       <view class="theme-toggle" bindtap="toggleTheme">
-        <text>{{theme === 'light' ? 'Wait' : 'Moon'}}</text> <!-- Placeholder icon/text -->
+      
+      <view class="lang-toggle" bindtap="toggleLanguage">
+        <text class="{{currentLang === 'zh' ? 'active' : ''}}">ZH</text>
+        <text class="divider">/</text>
+        <text class="{{currentLang === 'en' ? 'active' : ''}}">EN</text>
+      </view>
+
+       <view class="icon-btn" bindtap="toggleTheme">
+        <image class="icon" src="../../assets/{{theme === 'light' ? 'sun.svg' : 'moon.svg'}}" mode="aspectFit"></image>
       </view>
   </view>
 
@@ -51,6 +58,7 @@
                 todo="{{item}}" 
                 bind:toggle="onToggleTodo" 
                 bind:delete="onDeleteTodo" 
+                bind:swipeOpen="onSwipeOpen"
              />
            </view>
          </block>
@@ -68,6 +76,6 @@
   </view>
   
   <view class="footer">
-      <text>&copy; 2026 liuxiaozhi.org</text>
+      <text>{{translations.copyright}}</text>
   </view>
 </view>
