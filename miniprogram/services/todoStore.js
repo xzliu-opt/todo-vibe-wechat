@@ -12,7 +12,11 @@ class TodoStore {
         try {
             const stored = wx.getStorageSync(STORAGE_KEY);
             if (stored) {
-                this.todos = stored;
+                // Migration: Ensure all todos have createdAt
+                this.todos = stored.map((t) => ({
+                    ...t,
+                    createdAt: t.createdAt || Date.now()
+                }));
             }
         }
         catch (e) {
@@ -27,6 +31,7 @@ class TodoStore {
         this.notify();
     }
     notify() {
+        console.log('[TodoStore] Notifying listeners. Todos count:', this.todos.length);
         this.listeners.forEach(l => l([...this.todos])); // Send copy
     }
     subscribe(listener) {
@@ -52,7 +57,9 @@ class TodoStore {
             createdAt: Date.now(),
             subtasks: []
         };
+        console.log('[TodoStore] Adding new todo:', newTodo);
         this.todos = [newTodo, ...this.todos];
+        console.log('[TodoStore] Total todos:', this.todos.length);
         this.save();
     }
     toggleTodo(id) {

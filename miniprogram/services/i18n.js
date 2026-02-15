@@ -18,7 +18,16 @@ exports.translations = {
         created: "Created",
         done: "Done",
         took: "Took",
-        copyright: "© 2026 Crafted by Mia & Serge. All Rights Reserved."
+        copyright: "© 2026 Crafted by Mia & Serge. All Rights Reserved.",
+        calendarHistory: "History",
+        calendarNoActivity: "No activity on this day.",
+        weekdaySun: "Sun",
+        weekdayMon: "Mon",
+        weekdayTue: "Tue",
+        weekdayWed: "Wed",
+        weekdayThu: "Thu",
+        weekdayFri: "Fri",
+        weekdaySat: "Sat"
     },
     zh: {
         filterAll: "全部",
@@ -36,7 +45,16 @@ exports.translations = {
         created: "创建于",
         done: "完成于",
         took: "耗时",
-        copyright: "© 2026 Crafted by Mia & Serge. All Rights Reserved."
+        copyright: "© 2026 Crafted by Mia & Serge. All Rights Reserved.",
+        calendarHistory: "历史记录",
+        calendarNoActivity: "这天没有活动",
+        weekdaySun: "日",
+        weekdayMon: "一",
+        weekdayTue: "二",
+        weekdayWed: "三",
+        weekdayThu: "四",
+        weekdayFri: "五",
+        weekdaySat: "六"
     }
 };
 class I18nService {

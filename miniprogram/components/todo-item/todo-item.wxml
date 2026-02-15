@@ -6,7 +6,10 @@
             <icon type="success_no_circle" size="14" color="var(--color-text)" />
         </block>
       </view>
-      <text class="todo-text {{todo.completed ? 'completed' : ''}}">{{todo.text}}</text>
+      <view class="text-container">
+          <text class="todo-text {{todo.completed ? 'completed' : ''}}">{{todo.text}}</text>
+          <text class="todo-meta">{{metaString}}</text>
+      </view>
     </view>
 
     <!-- Static Delete Icon -->

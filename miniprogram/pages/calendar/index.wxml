@@ -1,0 +1,51 @@
+<view class="container {{theme === 'dark' ? 'dark-mode' : ''}}">
+    <view class="calendar-header">
+        <text class="month-label">{{monthLabel}}</text>
+        <view class="nav-controls">
+            <view class="nav-btn" bindtap="onPrevMonth">
+                <image src="/assets/left.svg" class="nav-icon" />
+            </view>
+            <view class="nav-btn" bindtap="onNextMonth">
+                <image src="/assets/right.svg" class="nav-icon" />
+            </view>
+        </view>
+    </view>
+
+    <view class="calendar-body">
+        <!-- Weekdays -->
+        <view class="week-row">
+            <text wx:for="{{weekdays}}" wx:key="*this" class="weekday">{{item}}</text>
+        </view>
+        
+        <!-- Days Grid -->
+        <view class="days-grid">
+            <view 
+                wx:for="{{days}}" 
+                wx:key="ts" 
+                class="day-cell {{item.empty ? 'empty' : ''}} {{item.isToday ? 'today' : ''}} {{item.isSelected ? 'selected' : ''}}"
+                bindtap="onSelectDay"
+                data-ts="{{item.ts}}"
+            >
+                <text class="day-num">{{item.day}}</text>
+                <view wx:if="{{item.hasData}}" class="dot"></view>
+            </view>
+        </view>
+    </view>
+
+    <!-- Filtered List -->
+    <scroll-view class="todo-list" scroll-y>
+        <view class="list-header" wx:if="{{filteredTodos.length > 0}}">{{translations.calendarHistory}}</view>
+
+        <block wx:for="{{filteredTodos}}" wx:key="id">
+            <todo-item
+                todo="{{item}}"
+                bind:toggle="onToggleTodo"
+                bind:delete="onDeleteTodo"
+            />
+        </block>
+
+        <view wx:if="{{filteredTodos.length === 0}}" class="empty-state">
+            <text>{{translations.calendarNoActivity}}</text>
+        </view>
+    </scroll-view>
+</view>

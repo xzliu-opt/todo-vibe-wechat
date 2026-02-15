@@ -73,14 +73,28 @@
   border-color: var(--color-checkbox-checked-border);
 }
 
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    flex: 1;
+}
+
 .todo-text {
   font-size: 32rpx;
   color: var(--color-text);
   transition: color 0.2s ease;
-  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.todo-meta {
+    font-size: 22rpx; /* approx 11px */
+    color: #8E8E93; /* Apple System Gray */
+    margin-top: 4rpx;
+    font-weight: 400;
 }
 
 .todo-text.completed {

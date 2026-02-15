@@ -7,6 +7,7 @@ export interface Todo {
     subtasks?: Subtask[];
     createdAt: number;
     completedAt?: number | null;
+    duration?: string; // e.g. "2h 30m"
     notes?: string;
 }
 

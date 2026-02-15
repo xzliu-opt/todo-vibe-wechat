@@ -18,6 +18,10 @@
        <view class="icon-btn" bindtap="toggleTheme">
         <image class="icon" src="../../assets/{{theme === 'light' ? 'sun.svg' : 'moon.svg'}}" mode="aspectFit"></image>
       </view>
+
+       <view class="icon-btn" bindtap="openCalendar">
+        <image class="icon" src="../../assets/calendar.svg" mode="aspectFit"></image>
+      </view>
   </view>
 
   <view class="surface">
@@ -58,7 +62,6 @@
                 todo="{{item}}" 
                 bind:toggle="onToggleTodo" 
                 bind:delete="onDeleteTodo" 
-                bind:swipeOpen="onSwipeOpen"
              />
            </view>
          </block>

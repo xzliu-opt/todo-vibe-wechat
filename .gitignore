@@ -109,3 +109,6 @@ out/
 build/
 coverage/
 .nyc_output/
+
+# CLAUDE.md
+CLAUDE.md

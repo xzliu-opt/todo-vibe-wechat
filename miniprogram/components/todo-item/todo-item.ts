@@ -1,18 +1,44 @@
+import { formatTime, formatDuration } from '../../services/date';
+import { Todo } from '../../services/types';
+
 Component({
     properties: {
-        todo: Object
+        todo: {
+            type: Object,
+            value: null
+        }
     },
 
     data: {
-        isDeleting: false
+        isDeleting: false,
+        metaString: '' as string
+    },
+
+    observers: {
+        'todo': function(todo: Todo) {
+            if (todo) {
+                this.updateMetaString(todo);
+            }
+        }
     },
 
     methods: {
-        onDelete() {
-            // Haptic feedback
-            wx.vibrateShort({ type: 'light' });
+        updateMetaString(todo: Todo) {
+            let metaString = '';
 
-            // Trigger exit animation and delete
+            if (todo.completed && todo.completedAt && todo.createdAt) {
+                // For completed todos: show completion time and duration
+                const duration = formatDuration(todo.completedAt - todo.createdAt);
+                metaString = `Done: ${formatTime(todo.completedAt)} • Took: ${duration}`;
+            } else if (todo.createdAt) {
+                // For active todos: show creation time
+                metaString = `Created: ${formatTime(todo.createdAt)}`;
+            }
+
+            this.setData({ metaString });
+        },
+
+        onDelete() {
             this.setData({ isDeleting: true });
 
             // Wait for animation

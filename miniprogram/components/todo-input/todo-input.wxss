@@ -46,5 +46,6 @@
 .plus-icon {
   width: 40rpx;
   height: 40rpx;
-  filter: invert(1); /* Ensure white icon on dark button */
+  /* Use dedicated button icon filter (opposite of header icons) */
+  filter: var(--icon-filter-btn, brightness(0) invert(1));
 }

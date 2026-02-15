@@ -119,14 +119,9 @@ Page({
         this.setData({ theme: newTheme });
     },
 
-    onSwipeOpen(e: CustomEvent) {
-        const openedId = e.detail.id;
-        // Close previous if different
-        const todoItems = this.selectAllComponents('todo-item');
-        todoItems.forEach((item: any) => {
-            if (item.data.todo.id !== openedId) {
-                item.close();
-            }
+    openCalendar() {
+        wx.navigateTo({
+            url: '/pages/calendar/index'
         });
     },
 

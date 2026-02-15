@@ -1,4 +1,5 @@
 import { Todo, Subtask } from './types';
+import { formatDuration } from './date';
 
 const STORAGE_KEY = 'todo-vibe-wechat-todos';
 
@@ -16,7 +17,11 @@ class TodoStore {
         try {
             const stored = wx.getStorageSync(STORAGE_KEY);
             if (stored) {
-                this.todos = stored;
+                // Migration: Ensure all todos have createdAt
+                this.todos = stored.map((t: Todo) => ({
+                    ...t,
+                    createdAt: t.createdAt || Date.now()
+                }));
             }
         } catch (e) {
             console.error('Failed to load todos', e);

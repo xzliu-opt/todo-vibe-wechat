@@ -51,6 +51,7 @@ Page({
         }
     },
     updateTodos(todos) {
+        console.log('[Index] updateTodos called. Todos count:', todos.length);
         const activeCount = todos.filter(t => !t.completed).length;
         const completedCount = todos.filter(t => t.completed).length;
         let filteredTodos = todos;
@@ -83,6 +84,7 @@ Page({
         });
     },
     onAddTodo(e) {
+        console.log('[Index] onAddTodo called with value:', e.detail.value);
         todoStore_1.todoStore.addTodo(e.detail.value);
     },
     onToggleTodo(e) {
@@ -104,6 +106,11 @@ Page({
         const newTheme = this.data.theme === 'light' ? 'dark' : 'light';
         app.globalData.theme = newTheme;
         this.setData({ theme: newTheme });
+    },
+    openCalendar() {
+        wx.navigateTo({
+            url: '/pages/calendar/index'
+        });
     },
     onCopyLink() {
         wx.setClipboardData({
