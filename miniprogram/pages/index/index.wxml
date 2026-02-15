@@ -55,17 +55,35 @@
             <text class="empty-subtitle">{{translations.emptyStateSubtitle}}</text>
         </view>
       </block>
-      <block wx:else>
-         <block wx:for="{{filteredTodos}}" wx:key="id">
-           <view class="todo-item-wrapper {{index > 0 ? 'border-top' : ''}}">
-             <todo-item 
-                todo="{{item}}" 
-                bind:toggle="onToggleTodo" 
-                bind:delete="onDeleteTodo" 
-             />
-           </view>
-         </block>
-      </block>
+     <block wx:else>
+          <wxs module="drag" src="./drag.wxs"></wxs>
+          <view
+            class="draggable-list"
+          >
+            <block wx:for="{{filteredTodos}}" wx:key="id" wx:for-index="index">
+              <view
+                class="todo-item-wrapper {{index > 0 ? 'border-top' : ''}} {{dragIndex === index ? 'dragging' : ''}}"
+                data-index="{{index}}"
+                data-height="56"
+                bindlongpress="{{drag.onLongPress}}"
+                catchtouchmove="{{drag.onTouchMove}}"
+                bindtouchend="{{drag.onTouchEnd}}"
+                bindtouchcancel="{{drag.onTouchEnd}}"
+              >
+                <view class="drag-handle">
+                  <view class="drag-line"></view>
+                  <view class="drag-line"></view>
+                  <view class="drag-line"></view>
+                </view>
+                <todo-item
+                   todo="{{item}}"
+                   bind:toggle="onToggleTodo"
+                   bind:delete="onDeleteTodo"
+                />
+              </view>
+            </block>
+          </view>
+       </block>
        <view class="list-padding"></view>
     </scroll-view>
 

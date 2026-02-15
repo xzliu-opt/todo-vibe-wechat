@@ -24,10 +24,13 @@ class TodoStore {
         }
     }
     save() {
-        wx.setStorage({
-            key: STORAGE_KEY,
-            data: this.todos
-        });
+        console.log('[TodoStore] Saving todos. Count:', this.todos.length);
+        try {
+            wx.setStorageSync(STORAGE_KEY, this.todos);
+            console.log('[TodoStore] Save completed successfully');
+        } catch (e) {
+            console.error('[TodoStore] Failed to save todos:', e);
+        }
         this.notify();
     }
     notify() {
@@ -124,6 +127,37 @@ class TodoStore {
             return t;
         });
         this.save();
+    }
+    reorderTodos(fromIndex, toIndex, skipSave = false) {
+        console.log('[TodoStore] Reordering:', fromIndex, '->', toIndex, skipSave ? '(skipSave)' : '');
+        console.log('[TodoStore] Before reorder:', this.todos.map(t => `${t.text} (${t.completed ? 'done' : 'active'})`));
+
+        const todos = [...this.todos];
+        const [movedItem] = todos.splice(fromIndex, 1);
+
+        // After removing the item, just insert at toIndex directly
+        // toIndex represents the final position the item should occupy
+        todos.splice(toIndex, 0, movedItem);
+
+        this.todos = todos;
+
+        console.log('[TodoStore] After reorder:', this.todos.map(t => `${t.text} (${t.completed ? 'done' : 'active'})`));
+
+        if (!skipSave) {
+            this.save();
+        }
+        else {
+            // Only notify without saving during drag
+            this.notify();
+        }
+    }
+    saveWithoutNotify() {
+        console.log('[TodoStore] saveWithoutNotify called');
+        try {
+            wx.setStorageSync(STORAGE_KEY, this.todos);
+        } catch (e) {
+            console.error('[TodoStore] Failed to save (no notify):', e);
+        }
     }
 }
 exports.todoStore = new TodoStore();

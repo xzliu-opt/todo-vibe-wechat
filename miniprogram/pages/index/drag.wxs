@@ -1,0 +1,121 @@
+var state = {
+    dragIndex: -1,
+    startY: 0,
+    itemHeight: 0,
+    listLength: 0,
+    lastTargetIndex: -1
+};
+
+function onLongPress(e, ownerInstance) {
+    var dataset = e.currentTarget.dataset;
+    var index = dataset.index;
+    
+    state.dragIndex = index;
+    state.lastTargetIndex = index;
+    state.startY = e.touches[0].pageY;
+    state.itemHeight = parseFloat(dataset.height) || 56;
+    
+    ownerInstance.callMethod('wxsLongPress', { index: index });
+}
+
+function onTouchMove(e, ownerInstance) {
+    if (state.dragIndex === -1) return false;
+
+    var touch = e.touches[0];
+    var deltaY = touch.pageY - state.startY;
+    
+    // We need itemHeight. If it wasn't set, we might need a backup.
+    // However, the TS wxsLongPress gets it and we could pass it back, 
+    // but better to get it once in onLongPress via some method.
+    // For now, we assume it's around 50px-60px or get it from list[0]
+    var list = ownerInstance.selectAllComponents('.todo-item-wrapper');
+    state.listLength = list.length;
+    
+    if (!state.itemHeight && list.length > 0) {
+        // Fallback: estimate or use a fixed value if getComputedStyle fails
+        state.itemHeight = 56; // Typical height including border
+    }
+
+    var currentIndex = state.dragIndex;
+    var targetIndex = Math.floor(currentIndex + (deltaY / state.itemHeight) + 0.5);
+    
+    if (targetIndex < 0) targetIndex = 0;
+    if (targetIndex >= state.listLength) targetIndex = state.listLength - 1;
+
+    // 1. Move the dragging item
+    var draggingItem = list[currentIndex];
+    draggingItem.setStyle({
+        'transform': 'translateY(' + deltaY + 'px) translateZ(0)',
+        'z-index': '1000'
+    });
+
+    // 2. Shift other items visually
+    if (state.lastTargetIndex !== targetIndex) {
+        state.lastTargetIndex = targetIndex;
+        // Optional: haptic feedback via TS
+        // ownerInstance.callMethod('wxsSwapTick');
+    }
+
+    for (var i = 0; i < list.length; i++) {
+        if (i === currentIndex) continue;
+
+        var shiftY = 0;
+        if (currentIndex < targetIndex) {
+            // Dragging down
+            if (i > currentIndex && i <= targetIndex) {
+                shiftY = -state.itemHeight;
+            }
+        } else if (currentIndex > targetIndex) {
+            // Dragging up
+            if (i < currentIndex && i >= targetIndex) {
+                shiftY = state.itemHeight;
+            }
+        }
+
+        list[i].setStyle({
+            'transform': 'translateY(' + shiftY + 'px) translateZ(0)',
+            'transition': 'transform 0.2s ease'
+        });
+    }
+
+    return false; // Prevent page scroll
+}
+
+function onTouchEnd(e, ownerInstance) {
+    if (state.dragIndex === -1) return;
+
+    var fromIndex = state.dragIndex;
+    var toIndex = state.lastTargetIndex;
+
+    // Reset all styles immediately to prevent ghosting during re-render
+    var list = ownerInstance.selectAllComponents('.todo-item-wrapper');
+    for (var i = 0; i < list.length; i++) {
+        list[i].setStyle({
+            'transform': '',
+            'transition': '',
+            'z-index': '',
+            'box-shadow': '',
+            'scale': '',
+            'opacity': ''
+        });
+    }
+
+    // Call final reorder in TS
+    if (fromIndex !== toIndex) {
+        ownerInstance.callMethod('wxsFinalReorder', { fromIndex: fromIndex, toIndex: toIndex });
+    } else {
+        ownerInstance.callMethod('wxsTouchEnd'); // Still need to reset dragging state
+    }
+    
+    state.dragIndex = -1;
+    state.lastTargetIndex = -1;
+}
+
+module.exports = {
+    onLongPress: onLongPress,
+    onTouchMove: onTouchMove,
+    onTouchEnd: onTouchEnd,
+    isDraggingItem: function(index, dragIndex) {
+        return dragIndex === index;
+    }
+};
